@@ -1,0 +1,42 @@
+.gallery {
+    padding: 2rem;
+}
+
+.container {
+    aspect-ratio: 16/10;
+    position: relative;
+    width: 100%;
+    border-radius: var(--large-border-radius);
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+.gridImages {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    justify-items: center;
+    gap: 1rem;
+    padding: 3rem;
+}
+
+.image {
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.image:hover {
+    transform: scale(1.1);
+}
+
+.descriptionContainer {
+    pointer-events: none;
+    width: 100%;
+    padding-block: 1rem;
+    padding-inline: 1rem;
+    background: linear-gradient(180deg, transparent 10%, #000000b9, #000 90%);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}

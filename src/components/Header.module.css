@@ -1,0 +1,37 @@
+.header {
+    width: 100%;
+    background-color: var(--item-background);
+    padding-block: 1rem;
+    padding-inline: 2rem;
+    border-bottom: 1px solid var(--border-color);
+    height: 7.7rem;
+}
+
+.title {
+    font-size: 3rem;
+}
+
+.subtitle {
+    letter-spacing: .3rem;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.row {
+    display: flex;
+    gap: .8rem;
+    align-items: center;
+}
+
+.stack {
+    cursor: pointer;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: .4rem;
+}

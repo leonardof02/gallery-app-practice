@@ -1,0 +1,23 @@
+.button {
+    cursor: pointer;
+    padding: .8rem;
+    color: var(--text-color);
+    font-weight: bold;
+    border-radius: var(--border-radius);
+    transition: filter 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+    text-transform: uppercase;
+}
+
+.button:hover {
+    filter: brightness(1.2);
+}
+
+.primary {
+    background-color: var(--primary);
+}
+
+.primaryOutline {
+    background-color: transparent;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+}

@@ -1,0 +1,11 @@
+.avatar {
+    display: flex;
+    align-items: center;
+    padding: .2rem;
+    border-radius: 50%;
+    width: 2rem;
+    background-color: var(--item-background);
+    color: var(--text-color);
+    width: fit-content;
+    height: auto;
+}
