@@ -8,12 +8,15 @@ import Link from "next/link";
 import Avatar from "./Avatar";
 import { useAuth } from "./Authentication/hooks/useAuth";
 
+import { MdUpload } from "react-icons/md";
+
 export default function Header() {
     const { isAuthenticated, setIsAuthenticated } = useAuth();
 
     function handleLogout() {
         localStorage.removeItem("token");
         setIsAuthenticated(false);
+        window.location.reload();
     }
 
     return (
@@ -25,6 +28,9 @@ export default function Header() {
                 </Link>
                 {isAuthenticated ? (
                     <div className={utilsStyles.flexCenter}>
+                        <Link href={"/upload"}>
+                            <MdUpload size={40} />
+                        </Link>
                         <Avatar />
                         <button
                             className={`${buttonStyles.button} ${buttonStyles.neutral}`}

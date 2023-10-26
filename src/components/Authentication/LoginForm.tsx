@@ -6,14 +6,20 @@ import { useRouter } from "next/router";
 import { useAuth } from "./hooks/useAuth";
 import Alert from "../Alert";
 import { isPasswordEmpty, isUsernameEmpty, validateUsername } from "@/services/ValidationService";
+import { useLoginValidation } from "./hooks/useLoginValidation";
 
 export default function LoginForm() {
     const router = useRouter();
     const { setIsAuthenticated } = useAuth();
 
-    const [passwordError, setPasswordError] = useState<string>("");
-    const [usernameError, setUsernameError] = useState<string>("");
-    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const {
+        errorMessage,
+        passwordError,
+        usernameError,
+        getPasswordErrors,
+        getUsernameErrors,
+        setErrorMessage,
+    } = useLoginValidation();
 
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -33,24 +39,6 @@ export default function LoginForm() {
             router.push("/");
         } catch (err) {
             setErrorMessage((err as Error).message);
-        }
-    }
-
-    function getPasswordErrors(password: string) {
-        try {
-            isPasswordEmpty(password);
-            setPasswordError("");
-        } catch (error: any) {
-            setPasswordError(error.message);
-        }
-    }
-
-    function getUsernameErrors(username: string) {
-        try {
-            isUsernameEmpty(username);
-            setUsernameError("");
-        } catch (error: any) {
-            setUsernameError(error.message);
         }
     }
 

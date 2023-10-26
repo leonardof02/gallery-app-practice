@@ -1,21 +1,25 @@
 import styles from "./AuthForm.module.css";
 import buttonStyles from "../Button.module.css";
-import { FormEvent, useState } from "react";
+import { FormEvent } from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "./hooks/useAuth";
-import { validatePassword, validateUsername } from "@/services/ValidationService";
-import { ValidationError } from "@/models/ValidationError";
 import { registerUser } from "@/services/RegisterService";
 import { authUser } from "@/services/AuthService";
 import Alert from "../Alert";
+import { useRegisterValidation } from "./hooks/useRegisterValidation";
 
 export default function RegisterForm() {
     const router = useRouter();
     const { setIsAuthenticated } = useAuth();
 
-    const [passwordErrors, setPasswordErrors] = useState<string[]>([]);
-    const [usernameErrors, setUsernameErrors] = useState<string[]>([]);
-    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const {
+        errorMessage,
+        getPasswordErrors,
+        getUsernameErrors,
+        passwordErrors,
+        setErrorMessage,
+        usernameErrors,
+    } = useRegisterValidation();
 
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -34,28 +38,6 @@ export default function RegisterForm() {
             router.push("/");
         } catch (err) {
             setErrorMessage((err as Error).message);
-        }
-    }
-
-    function getPasswordErrors(password: string) {
-        try {
-            validatePassword(password);
-            setPasswordErrors([]);
-        } catch (error: any) {
-            const errors = (error as ValidationError).errors;
-            setPasswordErrors(errors);
-            throw new Error("Validation Errors");
-        }
-    }
-
-    function getUsernameErrors(username: string) {
-        try {
-            validateUsername(username);
-            setUsernameErrors([]);
-        } catch (error: any) {
-            const errors = (error as ValidationError).errors;
-            setUsernameErrors(errors);
-            throw new Error("Validation Errors");
         }
     }
 

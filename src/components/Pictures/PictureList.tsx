@@ -1,11 +1,7 @@
-import { useEffect, useState } from "react";
-
-import styles from "@/components/PictureList/Picture.module.css";
-
-import { getAllPictures } from "@/services/PictureService";
-import Picture from "@/models/Picture";
+import styles from "./Picture.module.css";
 import PictureItem from "./Picture";
 import { usePictures } from "./hooks/usePictures";
+import { useAuth } from "../Authentication/hooks/useAuth";
 
 export default function PictureList() {
     
