@@ -23,6 +23,11 @@
     background-color: var(--primary);
 }
 
+.neutral {
+    background-color: var(--border-color);
+    color: white;
+}
+
 .primaryOutline {
     background-color: transparent;
     color: var(--primary);

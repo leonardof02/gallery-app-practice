@@ -2,13 +2,19 @@ import React from "react";
 
 import styles from "./Header.module.css";
 import buttonStyles from "./Button.module.css";
+import utilsStyles from "./Utils.module.css";
 
 import Link from "next/link";
 import Avatar from "./Avatar";
 import { useAuth } from "./Authentication/hooks/useAuth";
 
 export default function Header() {
-    const { isAuthenticated } = useAuth();
+    const { isAuthenticated, setIsAuthenticated } = useAuth();
+
+    function handleLogout() {
+        localStorage.removeItem("token");
+        setIsAuthenticated(false);
+    }
 
     return (
         <header className={styles.header}>
@@ -18,7 +24,15 @@ export default function Header() {
                     <p className={styles.subtitle}>Save your pictures</p>
                 </Link>
                 {isAuthenticated ? (
-                    <Avatar />
+                    <div className={utilsStyles.flexCenter}>
+                        <Avatar />
+                        <button
+                            className={`${buttonStyles.button} ${buttonStyles.neutral}`}
+                            onClick={handleLogout}
+                        >
+                            Log out
+                        </button>
+                    </div>
                 ) : (
                     <div className={styles.row}>
                         <Link

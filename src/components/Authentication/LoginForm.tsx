@@ -1,26 +1,56 @@
 import styles from "./LoginForm.module.css";
 import buttonStyles from "../Button.module.css";
-import { FormEvent } from "react";
+import { FormEvent, use, useState } from "react";
 import { authUser, getToken } from "@/services/AuthService";
 import { useRouter } from "next/router";
 import { useAuth } from "./hooks/useAuth";
+import Alert from "../Alert";
+import { isPasswordEmpty, isUsernameEmpty, validateUsername } from "@/services/ValidationService";
 
 export default function LoginForm() {
-
     const router = useRouter();
     const { setIsAuthenticated } = useAuth();
+
+    const [passwordError, setPasswordError] = useState<string>("");
+    const [usernameError, setUsernameError] = useState<string>("");
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
         try {
             const userFormData = new FormData(event.target as HTMLFormElement);
-            const userData: UserData = Object.fromEntries(userFormData.entries()) as unknown as UserData;
-            await authUser( userData.username, userData.password);
+            const userData: UserData = Object.fromEntries(
+                userFormData.entries()
+            ) as unknown as UserData;
+
+            const { username, password } = userData;
+
+            getUsernameErrors(username);
+            getPasswordErrors(password);
+
+            await authUser(username, password);
             setIsAuthenticated(true);
             router.push("/");
+        } catch (err) {
+            setErrorMessage((err as Error).message);
         }
-        catch( err ) {
-            console.log(err);
+    }
+
+    function getPasswordErrors(password: string) {
+        try {
+            isPasswordEmpty(password);
+            setPasswordError("");
+        } catch (error: any) {
+            setPasswordError(error.message);
+        }
+    }
+
+    function getUsernameErrors(username: string) {
+        try {
+            isUsernameEmpty(username);
+            setUsernameError("");
+        } catch (error: any) {
+            setUsernameError(error.message);
         }
     }
 
@@ -35,15 +65,26 @@ export default function LoginForm() {
                         placeholder="Username"
                         name="username"
                         id="username"
-                        className={styles.inputError}
+                        className={
+                            errorMessage || usernameError.length > 0 ? styles.inputError : ""
+                        }
                     />
-                    <p className={styles.labelError}>Error msg</p>
+                    {usernameError && <p className={styles.labelError}>{usernameError}</p>}
                 </div>
                 <div className={styles.inputContainer}>
                     <label htmlFor="password">Password</label>
-                    <input type="password" placeholder="Password" name="password" id="password" />
-                    <p className={styles.labelError}>Error msg</p>
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        name="password"
+                        id="password"
+                        className={
+                            errorMessage || passwordError.length > 0 ? styles.inputError : ""
+                        }
+                    />
+                    {passwordError && <p className={styles.labelError}>{passwordError}</p>}
                 </div>
+                {errorMessage && !usernameError && !passwordError && <Alert text={errorMessage} />}
                 <input
                     type="submit"
                     value="Log In"

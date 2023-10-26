@@ -30,3 +30,11 @@ export function validateUsername(username: string) {
         throw validationError;
     }
 }
+
+export function isPasswordEmpty(password: string) {
+    if (password == "") throw new Error("Empty Password")
+}
+
+export function isUsernameEmpty(username: string) {
+    if (username == "") throw new Error("Empty Username")
+}
