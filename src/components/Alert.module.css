@@ -1,0 +1,19 @@
+.alertContainer {
+    padding: 0.8rem;
+    display: flex;
+    align-items: center;
+    height: 4rem;
+    background-color: var(--error-transparent);
+    gap: .8rem;
+    border: 1px solid var(--error);
+    border-radius: .4rem;
+}
+
+.iconContainer {
+    display: grid;
+    align-self: center;
+}
+
+.alertMessage {
+    flex-grow: 1;
+}
