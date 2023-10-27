@@ -31,7 +31,8 @@
 }
 
 .descriptionContainer {
-    pointer-events: none;
+    display: flex;
+    justify-content: space-between;
     width: 100%;
     padding-block: 1rem;
     padding-inline: 1rem;
@@ -39,4 +40,18 @@
     position: absolute;
     bottom: 0;
     left: 0;
+}
+
+.controlsContainer {
+    display: flex;
+    gap: .7rem
+}
+
+.deleteButton {
+    color: var(--error);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    cursor: pointer;
 }

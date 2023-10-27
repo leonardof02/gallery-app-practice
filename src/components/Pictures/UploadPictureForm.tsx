@@ -19,7 +19,7 @@ export default function UploadPictureForm() {
     return (
         <div className={styles.center}>
             <form className={styles.form} onSubmit={handleSubmit}>
-                <h3 className={styles.formTitle}>Log In</h3>
+                <h3 className={styles.formTitle}>Upload Picture</h3>
                 <div className={styles.inputContainer}>
                     <label htmlFor="username">Choose a Picture</label>
                     <input type="file" placeholder="Select File" name="picture" id="picture" />

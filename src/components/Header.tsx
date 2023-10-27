@@ -16,7 +16,6 @@ export default function Header() {
     function handleLogout() {
         localStorage.removeItem("token");
         setIsAuthenticated(false);
-        window.location.reload();
     }
 
     return (

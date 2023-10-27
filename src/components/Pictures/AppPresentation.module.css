@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: calc(100vh - 7rem);
+    padding-inline: 4rem;
+    text-align: center;
+}
+
+.stack {
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: fit-content;
+}
+
+.mainText {
+    font-size: 2.3rem;
+    font-weight: lighter;
+}
