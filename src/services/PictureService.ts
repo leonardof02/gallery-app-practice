@@ -14,6 +14,19 @@ async function getAllPictures(): Promise<Picture[]> {
     return data;
 }
 
+async function getPictureById(id: number): Promise<Picture> {
+    const requestInit: RequestInit = {
+        method: "GET",
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem("token")}`,
+        },
+    };
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_DOMAIN}/Picture/${id}/details`, requestInit);
+    if (response.status == 401) throw new Error("Authentication Error, please Log In or Sign up");
+    const data = await response.json();
+    return data;
+}
+
 async function deletePictureById(id: number): Promise<Picture[]> {
     const requestInit: RequestInit = {
         method: "DELETE",
@@ -45,4 +58,4 @@ async function uploadPicture(picture: FormData): Promise<Response> {
     return data;
 }
 
-export { getAllPictures, uploadPicture, deletePictureById };
+export { getAllPictures, uploadPicture, deletePictureById, getPictureById };

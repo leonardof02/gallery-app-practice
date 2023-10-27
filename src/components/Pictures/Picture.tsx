@@ -13,7 +13,6 @@ interface Props extends Picture {
 }
 
 export default function PictureItem({ description, id, onDelete }: Props) {
-    
     async function handleDelete() {
         if (id) {
             await deletePictureById(id);
@@ -23,7 +22,7 @@ export default function PictureItem({ description, id, onDelete }: Props) {
 
     return (
         <div className={styles.container}>
-            <Link href={`${process.env.NEXT_PUBLIC_API_DOMAIN}/Picture/${id}`}>
+            <Link href={`/picture/${id}`}>
                 <Image
                     className={styles.image}
                     alt="Gallery Image"
