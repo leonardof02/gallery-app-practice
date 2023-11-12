@@ -1,11 +1,10 @@
 import styles from "./LoginForm.module.css";
 import buttonStyles from "../Button.module.css";
-import { FormEvent, use, useState } from "react";
-import { authUser, getToken } from "@/services/AuthService";
+import { FormEvent } from "react";
+import { authUser } from "@/services/AuthService";
 import { useRouter } from "next/router";
 import { useAuth } from "./hooks/useAuth";
 import Alert from "../Alert";
-import { isPasswordEmpty, isUsernameEmpty, validateUsername } from "@/services/ValidationService";
 import { useLoginValidation } from "./hooks/useLoginValidation";
 
 export default function LoginForm() {
